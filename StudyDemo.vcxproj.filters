@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{f25b8539-e8a8-4eaf-8f5c-aa36c233eec0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{84a6cab2-f084-4652-9735-9359bf2f49c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{d2a0101c-11a1-4297-9d46-a49d79c92dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\headers">
+      <UniqueIdentifier>{66aa2158-cf74-44c6-be67-194b7802f4a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\cpp">
+      <UniqueIdentifier>{b8a8ab45-bbca-4d98-bc9b-c8bde68670dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\other">
+      <UniqueIdentifier>{52dafff2-fb81-4059-8c9b-03939f6c2579}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\fragmentShader.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\vertexShader.vs">
+      <Filter>shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\stb_image.cpp">
+      <Filter>src\other</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glad.c">
+      <Filter>src\other</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>src\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>src\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cube.cpp">
+      <Filter>src\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>src\cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Shader.h">
+      <Filter>src\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cube.h">
+      <Filter>src\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>src\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>src\headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\img1.jpg">
+      <Filter>assets</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

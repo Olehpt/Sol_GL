@@ -1,0 +1,51 @@
+# --- Visual Studio ---
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# --- Build directories ---
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+ipch/
+
+# --- CMake (если используешь) ---
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build/
+
+# --- Temporary files ---
+*.log
+*.tmp
+*.temp
+*.pch
+
+# --- Auto-generated Visual Studio DB ---
+*.opendb
+*.VC.db
+*.VC.opendb
+
+# --- External packages ---
+packages/
+*.cache
+*.pdb
+
+# --- Compiled binaries ---
+*.exe
+*.dll
+*.lib
+*.exp
+
+# --- Misc ---
+*.idx
+*.ilk
+
+# --- JetBrains Rider/CLion (если вдруг используешь) ---
+.idea/
