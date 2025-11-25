@@ -10,25 +10,21 @@
 #include <src/Camera.h>
 #include <src/Cube.h>
 #include <src/Texture.h>
+#include <src/Callbacks.h>
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow* window);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-
-const int w = 1920, h = 1080;
-float lastX = w / 2.0f, lastY = h / 2.0f;
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-
-bool firstMouse = true;
 
 
 int main() { 
+   Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+   Context context(1920, 1080, &camera);
    //init
    glfwInit();
    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-   GLFWwindow* window = glfwCreateWindow(w, h, "StudyDemo", NULL, NULL);
+
+   GLFWwindow* window = glfwCreateWindow(context.w, context.h, "StudyDemo", NULL, NULL);
+   glfwSetWindowUserPointer(window, &context);
    if (window == NULL)
    {
        std::cout << "Failed to create GLFW window" << std::endl;
@@ -50,11 +46,11 @@ int main() {
    //
    Shader ourShader("shaders/vertexShader.vs", "shaders/fragmentShader.frag");
    Texture texture("assets/img1.jpg");
-   glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)w / (float)h, 0.1f, 100.0f);
+   glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)context.w/ (float)context.h, 0.1f, 100.0f);
    Cube cube;
    float dt = 0.0f, lf = 0.0f;
    //Render
-   glViewport(0, 0, w, h);
+   glViewport(0, 0, context.w, context.h);
    while (!glfwWindowShouldClose(window))
    {
 	   processInput(window);
@@ -62,11 +58,12 @@ int main() {
        glm::mat4 model(1.0f), view(1.0f);
        model = glm::rotate(model, glm::radians(-50.0f * (float)glfwGetTime() ), glm::vec3(1.0f, 0.1f, 0.5f));
        view = camera.GetViewMatrix();
-       unsigned int transformUni = glGetUniformLocation(ourShader.ID, "transform");
-	   glm::mat4 transform = projection*view*model;
        texture.use();
        ourShader.use();
+       unsigned int transformUni = glGetUniformLocation(ourShader.ID, "transform");
+	   glm::mat4 transform = projection*view*model;
 	   glUniformMatrix4fv(transformUni, 1, GL_FALSE, glm::value_ptr(transform));
+       
        cube.draw();
        glfwSwapBuffers(window);
        glfwPollEvents();
@@ -74,31 +71,4 @@ int main() {
    cube.remove();
    glfwTerminate();
    return 0;  
-}
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
-
-void processInput(GLFWwindow* window)
-{
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-}
-	
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
-{
-	if (firstMouse)
-	{
-		lastX = xpos;
-		lastY = ypos;
-		firstMouse = false;
-        return;
-	}
-	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos;
-    lastX = xpos;
-	lastY = ypos;
-	camera.MouseMovement(xoffset, yoffset);
 }

@@ -50,6 +50,7 @@
     <ClCompile Include="src\Texture.cpp">
       <Filter>src\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="src\Callbacks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Shader.h">
@@ -64,6 +65,7 @@
     <ClInclude Include="src\Texture.h">
       <Filter>src\headers</Filter>
     </ClInclude>
+    <ClInclude Include="src\Callbacks.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\img1.jpg">
