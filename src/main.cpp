@@ -12,44 +12,17 @@
 #include <src/Texture.h>
 #include <src/Callbacks.h>
 
-
+void Init(GLFWwindow*& window, Context& context);
 
 int main() { 
    Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
    Context context(1920, 1080, &camera);
-   //init
-   glfwInit();
-   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-   GLFWwindow* window = glfwCreateWindow(context.w, context.h, "StudyDemo", NULL, NULL);
-   glfwSetWindowUserPointer(window, &context);
-   if (window == NULL)
-   {
-       std::cout << "Failed to create GLFW window" << std::endl;
-       glfwTerminate();
-       return -1;
-   }
-   glfwMakeContextCurrent(window);
-   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-   {
-       std::cout << "Failed to initialize GLAD" << std::endl;
-       return -1;
-   }
-   //
-   glEnable(GL_DEPTH_TEST);
-   glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-   glfwSetCursorPosCallback(window, mouse_callback);
-   //
+   GLFWwindow* window = nullptr;
+   Init(window, context);
    Shader ourShader("shaders/vertexShader.vs", "shaders/fragmentShader.frag");
    Texture texture("assets/img1.jpg");
    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)context.w/ (float)context.h, 0.1f, 100.0f);
    Cube cube;
-   float dt = 0.0f, lf = 0.0f;
-   //Render
    glViewport(0, 0, context.w, context.h);
    while (!glfwWindowShouldClose(window))
    {
@@ -68,7 +41,32 @@ int main() {
        glfwSwapBuffers(window);
        glfwPollEvents();
    }
-   cube.remove();
    glfwTerminate();
    return 0;  
+}
+
+//-----------------------------------
+void Init(GLFWwindow *& window, Context &context) {
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    window = glfwCreateWindow(context.w, context.h, "StudyDemo", NULL, NULL);
+    if (window == NULL)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return;
+    }
+    glfwMakeContextCurrent(window);
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return;
+    }
+    glfwSetWindowUserPointer(window, &context);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glEnable(GL_DEPTH_TEST);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPosCallback(window, mouse_callback);
 }

@@ -5,6 +5,7 @@
 class Cube {
 public:
 	Cube();
+	~Cube();
 	void draw();
 	void remove();
 private:

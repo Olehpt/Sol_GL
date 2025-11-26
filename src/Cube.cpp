@@ -60,6 +60,10 @@ Cube::Cube() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+Cube::~Cube() {
+	remove();
+}
+
 void Cube::draw() {
 	glBindVertexArray(VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
