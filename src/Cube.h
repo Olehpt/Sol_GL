@@ -4,7 +4,9 @@
 #include <src/Shader.h>
 class Cube {
 public:
-	Cube();
+	glm::vec3 position;
+	unsigned int ID;
+	Cube(float x = 0, float y = 0, float z = 0, unsigned int id=0);
 	~Cube();
 	void draw();
 	void remove();

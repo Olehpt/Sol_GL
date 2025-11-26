@@ -47,7 +47,9 @@ static float verticies[] = {
     -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 };
 
-Cube::Cube() {
+Cube::Cube(float x, float y, float z, unsigned int id) {
+	position = glm::vec3(x, y, z);
+    ID = id;
     glGenBuffers(1, &VBO);
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
