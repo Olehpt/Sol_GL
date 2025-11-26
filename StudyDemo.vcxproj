@@ -23,6 +23,12 @@
     <None Include="shaders\vertexShader.vs" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\imgui\imgui.cpp" />
+    <ClCompile Include="include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="include\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="include\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="include\imgui\imgui_tables.cpp" />
+    <ClCompile Include="include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Callbacks.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Cube.cpp" />
@@ -33,6 +39,10 @@
     <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\imgui\imconfig.h" />
+    <ClInclude Include="include\imgui\imgui.h" />
+    <ClInclude Include="include\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="include\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\Callbacks.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Cube.h" />
@@ -131,7 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\User\Desktop\StudyDemo;C:\Users\User\Desktop\glfw-3.4\include;C:\Users\User\Desktop\StudyDemo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\User\Desktop\StudyDemo\include;C:\Users\User\Desktop\StudyDemo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

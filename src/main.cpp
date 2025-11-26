@@ -6,6 +6,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+
 #include <src/Shader.h> 
 #include <src/Camera.h>
 #include <src/Cube.h>
@@ -19,6 +23,13 @@ int main() {
     Context context(1920, 1080, &camera);
     GLFWwindow* window = nullptr;
     Init(window, context);
+    //imgui setup
+    ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGui::StyleColorsDark();
+	ImGui_ImplGlfw_InitForOpenGL(window, true);
+	ImGui_ImplOpenGL3_Init("#version 330");
+    //
     Shader ourShader("shaders/vertexShader.vs", "shaders/fragmentShader.frag");
     Texture texture1("assets/img1.jpg"), texture2("assets/img2.jpg"), texture3("assets/img3.jpg");
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)context.w / (float)context.h, 0.1f, 100.0f);
@@ -31,9 +42,11 @@ int main() {
     while (!glfwWindowShouldClose(window))
     {
 	   processInput(window);
+	   glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-       glm::mat4 model(1.0f), view(1.0f);
+       //cubes rendering
 	   for (Cube* cube : cubes) {
+           glm::mat4 model(1.0f), view(1.0f);
 		   model = glm::translate(model, cube->position);
            model = glm::rotate(model, glm::radians(-50.0f * (float)glfwGetTime()), glm::vec3(1.0f, 0.1f, 0.5f));
            view = camera.GetViewMatrix();
@@ -49,6 +62,7 @@ int main() {
            glUniformMatrix4fv(transformUni, 1, GL_FALSE, glm::value_ptr(transform));
            cube->draw();
 	   }
+	   //
        glfwSwapBuffers(window);
        glfwPollEvents();
     }
