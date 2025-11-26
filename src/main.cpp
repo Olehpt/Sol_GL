@@ -44,6 +44,9 @@ int main() {
 	   processInput(window);
 	   glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	   ImGui_ImplOpenGL3_NewFrame();
+	   ImGui_ImplGlfw_NewFrame();
+	   ImGui::NewFrame();
        //cubes rendering
 	   for (Cube* cube : cubes) {
            glm::mat4 model(1.0f), view(1.0f);
@@ -63,6 +66,11 @@ int main() {
            cube->draw();
 	   }
 	   //
+	   ImGui::Begin("Info");
+	   ImGui::Text("Camera angle: (%.1f, %.1f)", camera.Yaw, camera.Pitch);
+       ImGui::End();
+       ImGui::Render();
+	   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
        glfwSwapBuffers(window);
        glfwPollEvents();
     }
@@ -92,6 +100,7 @@ void Init(GLFWwindow *& window, Context &context) {
     glfwSetWindowUserPointer(window, &context);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glEnable(GL_DEPTH_TEST);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetMouseButtonCallback(window, button_callback);
 }
