@@ -47,9 +47,7 @@ static float verticies[] = {
     -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 };
 
-Cube::Cube(float x, float y, float z, unsigned int id) {
-	position = glm::vec3(x, y, z);
-    ID = id;
+Cube::Cube(float x, float y, float z, unsigned int id, Texture* t):position(glm::vec3(x,y,z)), ID(id), texture(t) {
     glGenBuffers(1, &VBO);
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
@@ -67,8 +65,8 @@ Cube::~Cube() {
 }
 
 void Cube::draw() {
-	glBindVertexArray(VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
+	if (texture)texture->use();
 }
 
 void Cube::remove() {

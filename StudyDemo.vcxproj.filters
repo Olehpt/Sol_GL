@@ -50,13 +50,14 @@
     <ClCompile Include="src\Texture.cpp">
       <Filter>src\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="src\Callbacks.cpp" />
+    <ClCompile Include="src\Context.cpp" />
     <ClCompile Include="include\imgui\imgui.cpp" />
     <ClCompile Include="include\imgui\imgui_draw.cpp" />
     <ClCompile Include="include\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="include\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="include\imgui\imgui_tables.cpp" />
     <ClCompile Include="include\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\ui\ui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Shader.h">
@@ -71,11 +72,12 @@
     <ClInclude Include="src\Texture.h">
       <Filter>src\headers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Callbacks.h" />
+    <ClInclude Include="src\Context.h" />
     <ClInclude Include="include\imgui\imconfig.h" />
     <ClInclude Include="include\imgui\imgui.h" />
     <ClInclude Include="include\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="include\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\ui\ui.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\img1.jpg">
