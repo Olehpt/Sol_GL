@@ -14,6 +14,6 @@ struct Context {
 
 void Init(Context& context);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow* window);
+void processInput(Context& context);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void button_callback(GLFWwindow* window, int button, int action, int mods);

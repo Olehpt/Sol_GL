@@ -17,7 +17,7 @@ int main() {
     Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     Context context(1920, 1080, &camera, nullptr);
     Init(context);
-    InitUI(context.window);
+    UI::InitUI(context.window);
     Shader ourShader("shaders/vertexShader.vs", "shaders/fragmentShader.frag");
     Texture* texture1 = new Texture("assets/img1.jpg"), *texture2 = new Texture("assets/img2.jpg"), *texture3 = new Texture("assets/img3.jpg");
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)context.w / (float)context.h, 0.1f, 100.0f);
@@ -29,10 +29,11 @@ int main() {
     glViewport(0, 0, context.w, context.h);
     while (!glfwWindowShouldClose(context.window))
     {
-	   processInput(context.window);
-	   glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	   processInput(context);
+       UI::NewFrame();
        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
        ourShader.use();
+	   camera.ProccessMovement();
 	   for (Cube* cube : cubes) {
            glm::mat4 model(1.0f), view(1.0f);
 		   model = glm::translate(model, cube->position);
@@ -43,6 +44,8 @@ int main() {
            glUniformMatrix4fv(transformUni, 1, GL_FALSE, glm::value_ptr(transform));
            cube->draw();
 	   }
+	   UI::Sidebar(400);
+       UI::Render();
        glfwSwapBuffers(context.window);
        glfwPollEvents();
     }

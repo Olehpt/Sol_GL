@@ -2,7 +2,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 
-Camera::Camera(glm::vec3 pos, glm::vec3 up, float yaw, float pitch, float s) :Position(pos), WorldUp(up), Yaw(yaw), Pitch(pitch), Sensivity(s) {
+Camera::Camera(glm::vec3 pos, glm::vec3 up, float yaw, float pitch, float s1, float s2) :Position(pos), WorldUp(up), Yaw(yaw), Pitch(pitch), Sensivity(s1), Speed(s2) {
 	Update();
 }
 
@@ -28,4 +28,28 @@ void Camera::Update() {
 	front.y = sin(glm::radians(Pitch));
 	front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
 	Front = glm::normalize(front);
+}
+
+void Camera::MoveForward() {
+	Position += Speed * Front;
+}
+void Camera::MoveBackward() {
+	Position -= Speed * Front;
+}
+void Camera::MoveLeft() {
+	Position -= glm::normalize(glm::cross(Front, WorldUp)) * Speed;
+}
+void Camera::MoveRight() {
+	Position += glm::normalize(glm::cross(Front, WorldUp)) * Speed;
+}
+
+void Camera::ProccessMovement() {
+	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_PRESS)
+		MoveForward();
+	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_S) == GLFW_PRESS)
+		MoveBackward();
+	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_A) == GLFW_PRESS)
+		MoveLeft();
+	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_D) == GLFW_PRESS)
+		MoveRight();
 }
